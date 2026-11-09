@@ -60,9 +60,9 @@ https://raw.githubusercontent.com/VanMo/quatrojet-releases/main/<apk из update
    ```
    Скрипт копирует APK, считает `sha256` и пишет `update.json`.
 3. `git add . && git commit -m "Релиз 0.4.8"`.
-4. Отправить содержимое в публичный канал:
+4. Отправить содержимое в публичный канал (токен — из `.github_token`):
    ```bash
-   git push <адрес quatrojet-releases> Releases:main
+   ../QjPy/scripts/push_release.sh
    ```
 5. Проверить, что `raw`-адреса отвечают **без авторизации**:
    ```bash
