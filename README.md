@@ -37,24 +37,31 @@ https://raw.githubusercontent.com/VanMo/quatrojet/Releases/update.json
 https://raw.githubusercontent.com/VanMo/quatrojet/Releases/<apk из update.json>
 ```
 
-Константы заданы в `Model/update/checker.py` (`MANIFEST_URL`, `APK_URL_TEMPLATE`);
-на время отладки адрес можно переопределить ключом `update.url` в `client.yaml`.
+Адрес описан в `Model/update/checker.py` (`MANIFEST_URL`), имя APK берётся из
+самого `update.json`. На время отладки адрес можно переопределить ключом
+`update.url` в `client.yaml`.
+
+**Репозиторий должен быть публичным.** Анонимный запрос к `raw.githubusercontent.com`
+для приватного репозитория возвращает 404, и приложение покажет «Сервер обновлений
+ответил кодом 404». Токен в приложение не встраивается: любой APK можно разобрать.
 
 ## Как опубликовать новую версию
 
 1. Поднять версию в `_version.py` и собрать подписанный APK:
    `./build_app_release.sh` → `bin/qjpy-<версия>-arm64-v8a-release.apk`.
-2. Перейти в ветку и положить APK рядом с `update.json`:
+2. Перейти в ветку `Releases` (в основном дереве или в отдельной рабочей копии)
+   и выполнить скрипт:
    ```bash
-   git switch Releases
-   cp ../bin/qjpy-0.4.8-arm64-v8a-release.apk .
-   sha256sum qjpy-0.4.8-arm64-v8a-release.apk
+   .venv/bin/python scripts/make_update_manifest.py \
+       --apk bin/qjpy-0.4.8-arm64-v8a-release.apk \
+       --notes "Что нового" --to .
    ```
-3. Обновить `update.json` (версия, имя файла, `sha256`, `notes`).
-4. `git add . && git commit -m "Релиз 0.4.8" && git push`.
-5. Проверить, что `raw`-адреса отвечают:
+   Скрипт копирует APK, считает `sha256` и пишет `update.json`.
+3. `git add . && git commit -m "Релиз 0.4.8" && git push`.
+4. Проверить, что `raw`-адреса отвечают **без авторизации**:
    ```bash
-   curl -s https://raw.githubusercontent.com/VanMo/quatrojet/Releases/update.json
+   curl -s -o /dev/null -w "%{http_code}\n" \
+       https://raw.githubusercontent.com/VanMo/quatrojet/Releases/update.json
    ```
 
 Порядок важен: сначала загружается APK, затем `update.json`. Иначе приложение
