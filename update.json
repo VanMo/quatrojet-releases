@@ -1,6 +1,6 @@
 {
-  "version": "0.4.20",
-  "apk": "qjpy-0.4.20-arm64-v8a-release.apk",
-  "sha256": "e7be95ce6e27c74e8f93f2cba12a73f6f8bda284f92450012364593aadde689c",
-  "notes": "Проверка автообновления: версия 0.4.20 в канале"
+  "version": "0.4.22",
+  "apk": "qjpy-0.4.22-arm64-v8a-release.apk",
+  "sha256": "5a7377bd954e468ec62fc7fb4e5a3f09e7dfbe163b10d18db38c281ca7664934",
+  "notes": "Исправлена установка обновлений на Android: опрос DownloadManager больше не падает с AttributeError"
 }
