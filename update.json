@@ -1,6 +1,6 @@
 {
-  "version": "0.4.31",
-  "apk": "qjpy-0.4.31-arm64-v8a-release.apk",
-  "sha256": "edd98e9b0e26b35ed7f288410c9608398a64d6b240d3dbf1400f5c36ba873ae5",
+  "version": "0.4.32",
+  "apk": "qjpy-0.4.32-arm64-v8a-release.apk",
+  "sha256": "f5236d65939649ed350344cb9aa1aac69500e88caf4f238189e559ef6380e464",
   "notes": "Приложение открывается само после установки обновления"
 }
